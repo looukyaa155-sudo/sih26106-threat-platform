@@ -768,7 +768,7 @@ export function analyzeEmail(rawInput: string, filename: string = "email.eml", c
       event_type: "TRIAGE_OPENED",
       title: `Forensic Dossier Generated: ${threatLevel}`,
       description: `Calculated Threat Score: ${overallThreatScore}/100 across 20 forensic vectors`,
-      source: "SIH26106 Engine",
+      source: "Cyber Forensics Engine",
     },
   ];
 

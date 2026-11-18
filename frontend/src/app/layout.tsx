@@ -4,9 +4,12 @@ import Sidebar from "@/components/common/Sidebar";
 import Header from "@/components/common/Header";
 
 export const metadata: Metadata = {
-  title: "SIH26106 | AI-Powered Email Threat Detection & Forensic Platform",
+  title: "AI-Powered Email Threat Detection, GeoLocation & Forensic Intelligence Platform",
   description:
     "Next-generation email forensic parser, SPF/DKIM/DMARC analyzer, network hop geolocation tracer, and explainable AI threat intelligence system.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({

@@ -6,9 +6,14 @@ import { Search, Bell, ShieldCheck, UserCheck, PlusCircle } from "lucide-react";
 export default function Header() {
   return (
     <header className="h-16 border-b border-surface-border bg-surface/80 backdrop-blur-md sticky top-0 z-20 px-6 flex items-center justify-between">
-      {/* Search Bar */}
-      <div className="flex items-center gap-3 w-96">
-        <div className="relative w-full">
+      {/* Search Bar & Institutional Branding */}
+      <div className="flex items-center gap-3">
+        <img
+          src="/logo.png"
+          alt="College Logo"
+          className="h-8 w-8 object-contain rounded-md bg-white/10 p-0.5 border border-indigo-500/30 md:hidden"
+        />
+        <div className="relative w-72 md:w-96">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
@@ -51,7 +56,7 @@ export default function Header() {
           </div>
           <div className="text-left hidden sm:block">
             <div className="text-xs font-semibold text-slate-200">Forensics Lead</div>
-            <div className="text-[10px] text-slate-400">SOC Analyst #26106</div>
+            <div className="text-[10px] text-slate-400">SOC Analyst Lead</div>
           </div>
         </div>
       </div>

@@ -55,9 +55,12 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   </div>
 
   <div class="header">
-    <div>
-      <div class="title">SIH26106 Digital Forensics Intelligence Dossier</div>
-      <div class="subtitle">AICTE Cyber Threat Intelligence & Analysis Gateway | Case ID: ${item.id}</div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <img src="/logo.png" style="height: 52px; width: 52px; object-fit: contain; border-radius: 8px; border: 1px solid #cbd5e1; padding: 4px;" alt="College Logo" />
+      <div>
+        <div class="title">Digital Forensics Intelligence Dossier</div>
+        <div class="subtitle">Cyber Threat Intelligence & Forensic Analysis Gateway | Case ID: ${item.id}</div>
+      </div>
     </div>
     <div style="text-align: right;">
       <span class="badge">${item.severity}</span>
@@ -163,7 +166,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   </div>
 
   <div style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 10px; font-size: 10px; color: #94a3b8; display: flex; justify-content: space-between;">
-    <span>SIH26106 SOC Intelligence Engine</span>
+    <span>Cyber Threat Intelligence & Forensic Gateway</span>
     <span>Generated: ${new Date().toUTCString()}</span>
     <span>Page 1 of 1</span>
   </div>

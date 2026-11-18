@@ -57,7 +57,7 @@ function initBaseline(): InvestigationDetail[] {
 
 function getStore(): InvestigationDetail[] {
   if (typeof window !== "undefined") {
-    const cached = localStorage.getItem("sih26106_investigations");
+    const cached = localStorage.getItem("cyber_threat_investigations");
     if (cached) {
       try {
         return JSON.parse(cached);
@@ -66,7 +66,7 @@ function getStore(): InvestigationDetail[] {
       }
     }
     const fresh = initBaseline();
-    localStorage.setItem("sih26106_investigations", JSON.stringify(fresh));
+    localStorage.setItem("cyber_threat_investigations", JSON.stringify(fresh));
     return fresh;
   }
 
@@ -78,7 +78,7 @@ function getStore(): InvestigationDetail[] {
 
 function saveStore(items: InvestigationDetail[]) {
   if (typeof window !== "undefined") {
-    localStorage.setItem("sih26106_investigations", JSON.stringify(items));
+    localStorage.setItem("cyber_threat_investigations", JSON.stringify(items));
   } else {
     serverStore = items;
   }

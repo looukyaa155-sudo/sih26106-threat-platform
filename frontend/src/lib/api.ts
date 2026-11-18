@@ -180,7 +180,7 @@ export async function lookupThreat(type: "ip" | "domain" | "hash", value: string
     type,
     reputation: value.includes("203.0.113") || value.includes("185.220") ? "MALICIOUS" : "BENIGN",
     threat_score: value.includes("203.0.113") || value.includes("185.220") ? 92 : 0,
-    provider: "SIH26106 Threat Intelligence Network",
+    provider: "Enterprise Threat Intelligence Network",
     details: {
       asn: "AS16509",
       country: "United States",

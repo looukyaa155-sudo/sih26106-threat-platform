@@ -31,18 +31,20 @@ export default function Sidebar() {
   return (
     <aside className="w-64 flex-shrink-0 bg-surface border-r border-surface-border flex flex-col h-screen fixed left-0 top-0 z-30">
       {/* Brand Header */}
-      <div className="p-5 border-b border-surface-border flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center shadow-glow">
-          <ShieldAlert className="w-6 h-6 text-white" />
-        </div>
+      <div className="p-4 border-b border-surface-border flex items-center gap-3">
+        <img
+          src="/logo.png"
+          alt="College Logo"
+          className="w-10 h-10 object-contain rounded-lg bg-white/10 p-1 border border-indigo-500/30 shadow-glow"
+        />
         <div>
           <div className="font-bold text-slate-100 tracking-wide flex items-center gap-1.5 text-sm">
-            <span>SIH26106</span>
-            <span className="text-xs bg-indigo-500/20 text-indigo-400 px-1.5 py-0.5 rounded border border-indigo-500/30">
-              SOC
+            <span>Cyber SOC</span>
+            <span className="text-[10px] bg-indigo-500/20 text-indigo-400 px-1.5 py-0.5 rounded border border-indigo-500/30 font-bold">
+              PORTAL
             </span>
           </div>
-          <div className="text-[11px] text-slate-400 font-medium">Email Threat Platform</div>
+          <div className="text-[11px] text-slate-400 font-medium">Email Threat Forensics</div>
         </div>
       </div>
 
@@ -89,7 +91,7 @@ export default function Sidebar() {
           </span>
         </div>
         <div className="text-[10px] text-slate-400 leading-tight">
-          AICTE & SIH Defense Node • Pipeline v1.0.0
+          Cybersecurity Forensics Node • Pipeline v1.0.0
         </div>
       </div>
     </aside>

@@ -80,11 +80,15 @@ export default function DashboardPage() {
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 font-mono text-[11px] font-bold border border-indigo-500/30">
-                SIH PROBLEM ID: SIH26106
+            <div className="flex items-center gap-3 mb-3">
+              <img
+                src="/logo.png"
+                alt="College Logo"
+                className="w-10 h-10 object-contain rounded-lg bg-white/10 p-1 border border-indigo-500/40 shadow-glow"
+              />
+              <span className="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-400 font-mono text-xs font-bold border border-indigo-500/30">
+                CYBER DEFENSE INTELLIGENCE PLATFORM
               </span>
-              <span className="text-xs text-slate-400">• AICTE Cybersecurity Platform</span>
             </div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
               AI-Powered Email Threat Detection

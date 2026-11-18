@@ -130,8 +130,8 @@ function sanitizeHtml(html: string): string {
     .replace(/\bon\w+\s*=\s*(?:'[^']*'|"[^"]*"|[^\s>]+)/gi, "");
 }
 
-export function analyzeEmail(rawInput: string, filename: string = "email.eml"): FullAnalysisResult {
-  const investigationId = `INV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${Math.floor(1000 + Math.random() * 9000)}`;
+export function analyzeEmail(rawInput: string, filename: string = "email.eml", customId?: string): FullAnalysisResult {
+  const investigationId = customId || `INV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${Math.floor(1000 + Math.random() * 9000)}`;
   const { headers, receivedList, body } = parseHeaders(rawInput);
 
   // 1. Sender Analysis

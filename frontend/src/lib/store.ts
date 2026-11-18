@@ -18,9 +18,10 @@ let serverStore: InvestigationDetail[] = [];
 function initBaseline(): InvestigationDetail[] {
   const list: InvestigationDetail[] = [];
   for (const demo of DEMO_EMAILS) {
-    const analysis = analyzeEmail(demo.raw, `${demo.id}.eml`);
+    const fixedId = `INV-DEMO-${demo.id.toUpperCase().replace(/[^A-Z0-9]/g, "-")}`;
+    const analysis = analyzeEmail(demo.raw, `${demo.id}.eml`, fixedId);
     const item: InvestigationDetail = {
-      id: analysis.summary.investigation_id,
+      id: fixedId,
       subject: analysis.summary.subject,
       sender: analysis.summary.sender,
       recipient: analysis.summary.recipient,
@@ -35,7 +36,7 @@ function initBaseline(): InvestigationDetail[] {
       dkim_status: analysis.authentication.dkim.status,
       dmarc_status: analysis.authentication.dmarc.status,
       status: analysis.summary.overall_threat_score >= 80 ? "ESCALATED" : analysis.summary.overall_threat_score >= 40 ? "IN_PROGRESS" : "CLOSED",
-      created_at: new Date(Date.now() - Math.random() * 86400000 * 3).toISOString(),
+      created_at: "2026-11-18T00:00:00.000Z",
       updated_at: new Date().toISOString(),
       summary: analysis.summary.verdict,
       raw_headers: analysis.raw.headers,
@@ -44,7 +45,7 @@ function initBaseline(): InvestigationDetail[] {
         {
           id: "note-1",
           author: "SOC Analyst",
-          timestamp: new Date().toISOString(),
+          timestamp: "2026-11-18T00:05:00.000Z",
           content: `Initial forensic ingestion automated: Overall Threat Score ${analysis.summary.overall_threat_score}/100 (${analysis.summary.threat_level}).`,
         },
       ],
@@ -124,7 +125,43 @@ export function getAllInvestigations(params?: {
 
 export function getInvestigationById(id: string): InvestigationDetail | null {
   const items = getStore();
-  return items.find((i) => i.id === id) || null;
+  const found = items.find((i) => i.id.toLowerCase() === id.toLowerCase());
+  if (found) return found;
+
+  // Fallback for demo IDs across serverless cold starts
+  const matchDemo = DEMO_EMAILS.find(
+    (d) =>
+      `INV-DEMO-${d.id.toUpperCase().replace(/[^A-Z0-9]/g, "-")}`.toLowerCase() === id.toLowerCase() ||
+      d.id.toLowerCase() === id.toLowerCase()
+  );
+  if (matchDemo) {
+    const fixedId = `INV-DEMO-${matchDemo.id.toUpperCase().replace(/[^A-Z0-9]/g, "-")}`;
+    const analysis = analyzeEmail(matchDemo.raw, `${matchDemo.id}.eml`, fixedId);
+    return {
+      id: fixedId,
+      subject: analysis.summary.subject,
+      sender: analysis.summary.sender,
+      recipient: analysis.summary.recipient,
+      email_date: analysis.summary.date,
+      filename: `${matchDemo.id}.eml`,
+      threat_score: analysis.summary.overall_threat_score,
+      severity: analysis.summary.threat_level as any,
+      header_trust_score: analysis.summary.header_trust_score,
+      source_ip: analysis.routing_hops[0]?.from_ip || "198.51.100.88",
+      source_country: analysis.routing_hops[0]?.country || "United States",
+      spf_status: analysis.authentication.spf.status,
+      dkim_status: analysis.authentication.dkim.status,
+      dmarc_status: analysis.authentication.dmarc.status,
+      status: "IN_PROGRESS",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      summary: analysis.summary.verdict,
+      raw_headers: analysis.raw.headers,
+      analysis,
+      notes: [],
+    };
+  }
+  return null;
 }
 
 export function saveNewInvestigation(analysis: FullAnalysisResult, filename: string = "email.eml"): InvestigationDetail {
